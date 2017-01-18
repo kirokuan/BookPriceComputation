@@ -18,20 +18,25 @@ namespace BookPriceComputation
         }; 
         public static decimal GetPrice(this IEnumerable<Book> books)
         {
-            var booksIds = books.Select(b => b.ID).ToList();
             decimal sum = 0;
-            while (booksIds.Any())
+            var newBooks=new List<Book>(books);
+            while (newBooks.Any())
             {
-                var distinct = booksIds.Distinct();
+                var distinct = newBooks.Distinct(new BookComparer());
                 sum += BooksOffMap[distinct.Count()] * BookPrice;
-                foreach (var id in new List<int>(distinct))
-                {
-                    booksIds.Remove(id);
-                }
+                newBooks = newBooks.ExceptOnce(distinct);
             }
             return sum;
         }
 
+        private static List<Book> ExceptOnce(this ICollection<Book> booksIds, IEnumerable<Book> distinct)
+        {
+            foreach (var item in new List<Book>(distinct))
+            {
+                booksIds.Remove(item);
+            }
+            return new List<Book>(booksIds);
+        }
         private static int BookPrice
         {
             get {return 100;}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookPriceComputation
 {
-    public class Book
+    public class Book 
     {
         public Book(int id)
         {
@@ -22,6 +22,21 @@ namespace BookPriceComputation
                 return anotherBook.ID == this.ID;
             }
 
+        }
+
+    
+    }
+
+    public class BookComparer : IEqualityComparer<Book>
+    {
+        public bool Equals(Book book1, Book book2)
+        {
+            return book1.Equals(book2);
+        }
+
+        public int GetHashCode(Book book)
+        {
+            return book.ID;
         }
     }
 }
