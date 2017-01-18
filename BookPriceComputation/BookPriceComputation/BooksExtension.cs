@@ -10,20 +10,26 @@ namespace BookPriceComputation
     {
         public static decimal GetPrice(this IEnumerable<Book> books)
         {
-            if (books.Count() > 1)
+            var countAll = books.Count();
+            if (countAll > 1)
             {
-                var bookArr = books.ToArray();
-                if (books.Count() > 2 && !bookArr[0].Equals(bookArr[1]) && !bookArr[1].Equals(bookArr[2]))
+                var distinctCount = books.Select(b => b.ID).Distinct().Count();
+                if (distinctCount==3)
                 {
-                    return books.Count() * 100 * 0.9m;
+                    return countAll * BookPrice * 0.9m;
                 }
-                if (!bookArr[0].Equals(bookArr[1]))
+                if (distinctCount == 2)
                 {
-                    return books.Count()*100*0.95m;
+                    return countAll * BookPrice * 0.95m;
                 }
                 
             }
-            return books.Count()*100;
+            return countAll*BookPrice;
+        }
+
+        private static int BookPrice
+        {
+            get {return 100;}
         }
     }
 }
