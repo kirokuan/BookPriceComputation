@@ -23,14 +23,11 @@ namespace BookPriceComputation
             while (booksIds.Any())
             {
                 sum += BooksOffMap[booksIds.Distinct().Count()] * BookPrice;
-                var newBooksIds = new List<int>(booksIds.Distinct());
-                foreach (var id in newBooksIds)
+                foreach (var id in new List<int>(booksIds.Distinct()))
                 {
                     booksIds.Remove(id);
                 }
-
             }
-
             return sum;
         }
 
