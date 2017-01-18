@@ -34,5 +34,14 @@ namespace BookPriceComputation
             };
             Assert.AreEqual(200, books.GetPrice());
         }
+        [Test]
+        public void Buy2BookWithDiffId()
+        {
+            var books = new List<Book>()
+            {
+                new Book(1),new Book(2)
+            };
+            Assert.AreEqual(190, books.GetPrice());
+        }
     }
 }
