@@ -13,11 +13,11 @@ namespace BookPriceComputation
             if (books.Count() > 1)
             {
                 var bookArr = books.ToArray();
-                if (books.Count() > 2 && bookArr[0].ID != bookArr[1].ID && bookArr[1].ID != bookArr[2].ID)
+                if (books.Count() > 2 && !bookArr[0].Equals(bookArr[1]) && !bookArr[1].Equals(bookArr[2]))
                 {
                     return books.Count() * 100 * 0.9m;
                 }
-                if (bookArr[0].ID != bookArr[1].ID)
+                if (!bookArr[0].Equals(bookArr[1]))
                 {
                     return books.Count()*100*0.95m;
                 }
