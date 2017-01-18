@@ -74,10 +74,22 @@ namespace BookPriceComputation
             };
             Assert.AreEqual(290, books.GetPrice());
         }
-
-        private static Book Book3
+        [Test]
+        public void Buy4BooksWithDiffId()
+        {
+            var books = new List<Book>()
+            {
+                Book1,Book2,Book3,Book4
+            };
+            Assert.AreEqual(320, books.GetPrice());
+        }
+        private Book Book3
         {
             get { return new Book(3); }
+        }
+        private Book Book4
+        {
+            get { return new Book(4); }
         }
     }
 }
