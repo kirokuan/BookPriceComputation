@@ -8,6 +8,10 @@ namespace BookPriceComputation
 {
     public class Book
     {
+        public Book(int id)
+        {
+            ID = id;
+        }
         public int ID { get; set; }
     }
 }

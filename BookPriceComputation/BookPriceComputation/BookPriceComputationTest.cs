@@ -20,7 +20,7 @@ namespace BookPriceComputation
         {
             var books = new List<Book>()
             {
-                new Book()
+                new Book(1)
             };
             Assert.AreEqual(100, books.GetPrice());
         }
@@ -30,7 +30,7 @@ namespace BookPriceComputation
         {
             var books = new List<Book>()
             {
-                new Book(),new Book()
+                new Book(1),new Book(1)
             };
             Assert.AreEqual(200, books.GetPrice());
         }
