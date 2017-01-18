@@ -10,6 +10,7 @@ namespace BookPriceComputation
     {
         public static decimal GetPrice(this IEnumerable<Book> book)
         {
+            if (book.Count() > 0) return 100;
             return 0;
         }
     }
