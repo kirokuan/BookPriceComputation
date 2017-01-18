@@ -10,33 +10,36 @@ namespace BookPriceComputation
     {
         public static decimal GetPrice(this IEnumerable<Book> books)
         {
-            var distinctCount = books.Select(b => b.ID).Distinct().Count();
-            var count = books.Count();
+            var booksIds = books.Select(b => b.ID).ToList();
             decimal sum = 0;
-            if (distinctCount > 1)
+            while (booksIds.Any())
             {
-                count -= distinctCount;
-            }
-            switch (distinctCount)
-            {
-                case 5:
+                decimal off = 1;
+                switch (booksIds.Distinct().Count())
+                {
+                    case 5:
+                        off = .75m;
+                        break;
+                    case 4:
+                        off = 0.8m;
+                        break;
+                    case 3:
+                        off = 0.9m;
+                        break;
+                    case 2:
+                        off = 0.95m;
+                        break;
+                }
+                sum += booksIds.Distinct().Count()*BookPrice*off;
+                var newBooksIds = new List<int>(booksIds.Distinct());
+                foreach (var id in newBooksIds)
+                {
+                    booksIds.Remove(id);
+                }
 
-                    sum += distinctCount * BookPrice * 0.75m;
-                    break;
-                case 4:
-
-                    sum += distinctCount * BookPrice * 0.8m;
-                    break;
-                case 3:
-                   
-                    sum += distinctCount * BookPrice * 0.9m;
-                    break;
-                case 2:
-                   
-                    sum+=distinctCount * BookPrice * 0.95m;
-                    break;
             }
-            return sum+count*BookPrice;
+
+            return sum;
         }
 
         private static int BookPrice
