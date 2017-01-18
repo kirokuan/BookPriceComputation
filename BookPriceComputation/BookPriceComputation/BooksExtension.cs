@@ -8,10 +8,9 @@ namespace BookPriceComputation
 {
     public static class BooksExtension
     {
-        public static decimal GetPrice(this IEnumerable<Book> book)
+        public static decimal GetPrice(this IEnumerable<Book> books)
         {
-            if (book.Count() > 0) return 100;
-            return 0;
+            return books.Count()*100;
         }
     }
 }

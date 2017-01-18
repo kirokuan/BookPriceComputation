@@ -24,5 +24,15 @@ namespace BookPriceComputation
             };
             Assert.AreEqual(100, books.GetPrice());
         }
+
+        [Test]
+        public void Buy2Book()
+        {
+            var books = new List<Book>()
+            {
+                new Book(),new Book()
+            };
+            Assert.AreEqual(200, books.GetPrice());
+        }
     }
 }
