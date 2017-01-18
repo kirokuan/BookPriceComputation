@@ -11,20 +11,17 @@ namespace BookPriceComputation
         public static decimal GetPrice(this IEnumerable<Book> books)
         {
             var countAll = books.Count();
-            if (countAll > 1)
+            var distinctCount = books.Select(b => b.ID).Distinct().Count();
+            var price = countAll*BookPrice;
+            if (distinctCount==3)
             {
-                var distinctCount = books.Select(b => b.ID).Distinct().Count();
-                if (distinctCount==3)
-                {
-                    return countAll * BookPrice * 0.9m;
-                }
-                if (distinctCount == 2)
-                {
-                    return countAll * BookPrice * 0.95m;
-                }
-                
+                 return price * 0.9m;
             }
-            return countAll*BookPrice;
+            if (distinctCount == 2)
+            {
+                 return price * 0.95m;
+            }
+            return price;
         }
 
         private static int BookPrice
