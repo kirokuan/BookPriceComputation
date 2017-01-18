@@ -19,6 +19,10 @@ namespace BookPriceComputation
             }
             switch (distinctCount)
             {
+                case 5:
+
+                    sum += distinctCount * BookPrice * 0.75m;
+                    break;
                 case 4:
 
                     sum += distinctCount * BookPrice * 0.8m;
