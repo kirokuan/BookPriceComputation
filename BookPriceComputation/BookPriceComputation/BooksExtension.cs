@@ -8,29 +8,21 @@ namespace BookPriceComputation
 {
     public static class BooksExtension
     {
+        public static  Dictionary<int,decimal> BooksOffMap=new Dictionary<int, decimal>()
+        {
+            {5,0.75m*5},
+            {4,0.8m*4},
+            {3,0.9m*3},
+            {2,0.95m*2},
+            {1,1m}
+        }; 
         public static decimal GetPrice(this IEnumerable<Book> books)
         {
             var booksIds = books.Select(b => b.ID).ToList();
             decimal sum = 0;
             while (booksIds.Any())
             {
-                decimal off = 1;
-                switch (booksIds.Distinct().Count())
-                {
-                    case 5:
-                        off = .75m;
-                        break;
-                    case 4:
-                        off = 0.8m;
-                        break;
-                    case 3:
-                        off = 0.9m;
-                        break;
-                    case 2:
-                        off = 0.95m;
-                        break;
-                }
-                sum += booksIds.Distinct().Count()*BookPrice*off;
+                sum += BooksOffMap[booksIds.Distinct().Count()] * BookPrice;
                 var newBooksIds = new List<int>(booksIds.Distinct());
                 foreach (var id in newBooksIds)
                 {
