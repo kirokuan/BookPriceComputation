@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookPriceComputation
 {
-    public class Class1
+    class BookPriceComputationTest
     {
     }
 }
