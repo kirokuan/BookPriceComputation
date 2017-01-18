@@ -24,13 +24,13 @@ namespace BookPriceComputation
                 + books.ToList().ExceptOnce(distinctBooks).GetPrice();
         }
 
-        private static IEnumerable<Book> ExceptOnce(this ICollection<Book> booksIds, IEnumerable<Book> distinct)
+        private static IEnumerable<Book> ExceptOnce(this ICollection<Book> books, IEnumerable<Book> distinct)
         {
             foreach (var item in new List<Book>(distinct))
             {
-                booksIds.Remove(item);
+                books.Remove(item);
             }
-            return new List<Book>(booksIds);
+            return new List<Book>(books);
         }
         private static int BookPrice
         {
