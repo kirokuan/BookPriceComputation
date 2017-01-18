@@ -9,6 +9,16 @@ namespace BookPriceComputation
 {
     class BookPriceComputationTest
     {
+        private Book Book1
+        {
+            get { return new Book(1); }
+        }
+
+        private Book Book2
+        {
+            get { return new Book(2); }
+        }
+
         [Test]
         public void BuyNothing()
         {
@@ -20,7 +30,7 @@ namespace BookPriceComputation
         {
             var books = new List<Book>()
             {
-                new Book(1)
+                Book1
             };
             Assert.AreEqual(100, books.GetPrice());
         }
@@ -30,7 +40,7 @@ namespace BookPriceComputation
         {
             var books = new List<Book>()
             {
-                new Book(1),new Book(1)
+                Book1,Book1
             };
             Assert.AreEqual(200, books.GetPrice());
         }
@@ -39,19 +49,25 @@ namespace BookPriceComputation
         {
             var books = new List<Book>()
             {
-                new Book(1),new Book(2)
+                Book1,Book2
             };
             Assert.AreEqual(190, books.GetPrice());
         }
+
 
         [Test]
         public void Buy3BooksWithDiffId()
         {
             var books = new List<Book>()
             {
-                new Book(1),new Book(2),new Book(3)
+                Book1,Book2,Book3
             };
             Assert.AreEqual(270, books.GetPrice());
+        }
+
+        private static Book Book3
+        {
+            get { return new Book(3); }
         }
     }
 }
